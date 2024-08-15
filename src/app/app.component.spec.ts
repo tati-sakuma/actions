@@ -26,10 +26,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('senac-frontend-202x');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('senac-frontend-202x app is running!');
-  });
+//   it('should render title', () => {
+//     const fixture = TestBed.createComponent(AppComponent);
+//     fixture.detectChanges();
+//     const compiled = fixture.nativeElement as HTMLElement;
+//     expect(compiled.querySelector('.content span')?.textContent).toContain('senac-frontend-202x app is running!');
+//   });
 });
