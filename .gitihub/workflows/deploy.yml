@@ -1,0 +1,45 @@
+name: Deploy Angular App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Set this to your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3 # biblioteca do git que já tem configurações para essa necessidade
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # Define a versão do Node.js
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
+    - name: Run unit tests
+      run: ng test --watch=false --browsers=ChromeHeadless
+
+    - name: Build the app
+      run: ng build --prod --base-href "https://tati-sakuma.github.io/actions/"
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3 # biblioteca 
+      with:
+        github_token: ${{ secrets.TOKEN }}
+        publish_dir: ./docs/
